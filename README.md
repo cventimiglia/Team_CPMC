@@ -5,7 +5,7 @@
 2. **Constance Yang** :rainbow:
 	* UI/UX Design Lead
 	* Testing Lead
-3. Michelle Watson
+3. Michelle Watson :v:
 	* Team Manager
 	* Client Liason
 4. **Cameron Ventimiglia** :smile:
