@@ -1,6 +1,6 @@
 # Team_CPMC
 ### Team Members
-1. Puen Xie
+1. **Puen Xie** :sweat_smile:
 	* Code Architecture Lead
 2. **Constance Yang** :rainbow:
 	* UI/UX Design Lead
