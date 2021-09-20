@@ -2,13 +2,13 @@
 ### Team Members
 1. Puen Xie
 	* Code Architecture Lead
-2. Constance Yang :rainbow
+2. **Constance Yang** :rainbow:
 	* UI/UX Design Lead
 	* Testing Lead
 3. Michelle Watson
 	* Team Manager
 	* Client Liason
-4. Cameron Ventimiglia
+4. **Cameron Ventimiglia** :smile:
 	* Documentation Lead
 	* Data Modeler
 ### About Our Project
