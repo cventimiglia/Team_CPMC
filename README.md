@@ -32,8 +32,8 @@ integer parameter can have equivalence classes: “Negative”, “Positive”, 
 of the same type. An example would be the numbers Seven or Eight. Since the two numbers are both 
 positive integers, they will provide the same functionality within the test.
 ### Important Info/Links
-Our [gitRepo](https://github.com/cventimiglia/Team_CPMC)
-Our [Progress tracking tool](https://jira.ggc.edu/secure/RapidBoard.jspa?rapidView=93&projectKey=TC&view=planning.nodetail&epics=visible&issueLimit=100)
+*Our [gitRepo](https://github.com/cventimiglia/Team_CPMC)
+*Our [Progress tracking tool](https://jira.ggc.edu/secure/RapidBoard.jspa?rapidView=93&projectKey=TC&view=planning.nodetail&epics=visible&issueLimit=100)
 * Communication Platforms
 	* Discord
 	* Microsoft Teams
