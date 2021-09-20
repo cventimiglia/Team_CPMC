@@ -8,3 +8,7 @@ Client Liason: Michelle Watson
 Documentation lead: Cameron Ventimiglia
 Testing Lead: Constance Yang
 Data Modeler: Cameron Ventimiglia
+
+## Constance Yang :rainbow:
+	* UI/UX Design Lead
+	* Testing Lead
