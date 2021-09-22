@@ -1,0 +1,136 @@
+{
+	"Name": "SaveTests",
+	"Text": "Interface can be saved using any combinations of the parameters",
+	"CoverageGroups": [{
+		"Name": "Pairwise14",
+		"Parameters": ["OrgLevel1", "OrgLevel2", "OrgLevel3", "OrgLevel4"]
+	}, {
+		"Name": "Ordering1",
+		"Parameters": ["OrgLevel1", "Ordering"]
+	}, {
+		"Name": "Ordering2",
+		"Parameters": ["OrgLevel2", "Ordering"]
+	}, {
+		"Name": "Ordering3",
+		"Parameters": ["OrgLevel3", "Ordering"]
+	}, {
+		"Name": "Ordering4",
+		"Parameters": ["OrgLevel4", "Ordering"]
+	}],
+	"InputParameters": {
+		"OrgLevel1": {
+			"Name": "OrgLevel1",
+			"Text": "OrgLevel1",
+			"EquivalenceClasses": {
+				"Present": {
+					"Name": "Present",
+					"Text": "(Id=1,Code=Division)"
+				},
+				"Absent": {
+					"Name": "Absent",
+					"Text": "absent"
+				}
+			}
+		},
+		"OrgLevel2": {
+			"Name": "OrgLevel2",
+			"Text": "OrgLevel2",
+			"EquivalenceClasses": {
+				"Present": {
+					"Name": "Present",
+					"Text": "(Id=2,Code=Department)"
+				},
+				"Absent": {
+					"Name": "Absent",
+					"Text": "absent"
+				}
+			}
+		},
+		"OrgLevel3": {
+			"Name": "OrgLevel3",
+			"Text": "OrgLevel3",
+			"EquivalenceClasses": {
+				"Present": {
+					"Name": "Present",
+					"Text": "(Id=3,Code=Team)"
+				},
+				"Absent": {
+					"Name": "Absent",
+					"Text": "absent"
+				}
+			}
+		},
+		"OrgLevel4": {
+			"Name": "OrgLevel4",
+			"Text": "OrgLevel4",
+			"EquivalenceClasses": {
+				"Present": {
+					"Name": "Present",
+					"Text": "(Id=4,Code=Cell)"
+				},
+				"Absent": {
+					"Name": "Absent",
+					"Text": "absent"
+				}
+			}
+		},
+		"Ordering": {
+			"Name": "Ordering",
+			"Text": "ordering of ORG levels",
+			"EquivalenceClasses": {
+				"SortedAscending": {
+					"Name": "SortedAscending",
+					"Text": "sorted ascending",
+					"ConstraintsAsString": "OrgLevel1 = Present or OrgLevel2 = Present or OrgLevel3 = Present or OrgLevel4 = Present"
+				},
+				"SortedDescending": {
+					"Name": "SortedDescending",
+					"Text": "sorted descending",
+					"ConstraintsAsString": "OrgLevel1 = Present or OrgLevel2 = Present or OrgLevel3 = Present or OrgLevel4 = Present"
+				},
+				"Random": {
+					"Name": "Random",
+					"Text": "sorted randomly",
+					"ConstraintsAsString": "OrgLevel1 = Present or OrgLevel2 = Present or OrgLevel3 = Present or OrgLevel4 = Present"
+				},
+				"NoSorting": {
+					"Name": "NoSorting",
+					"Text": "no sorting",
+					"ConstraintsAsString": "OrgLevel1 = Absent and OrgLevel2 = Absent and OrgLevel3 = Absent and OrgLevel4 = Absent"
+				}
+			}
+		}
+	},
+	"ExpectedResults": {
+		"AllParametersSortedAscending": {
+			"Name": "AllParametersSortedAscending",
+			"Text": "parameters are sorted in ascending order",
+			"Condition": "Ordering = SortedAscending"
+		},
+		"AllParametersSortedDescending": {
+			"Name": "AllParametersSortedDescending",
+			"Text": "parameters are sorted in descending order",
+			"Condition": "Ordering = SortedDescending"
+		},
+		"AllParametersSortedRandomly": {
+			"Name": "AllParametersSortedRandomly",
+			"Text": "parameters are sorted in random order",
+			"Condition": "Ordering = Random"
+		},
+		"AllParametersArePresent": {
+			"Name": "AllParametersArePresent",
+			"Text": "ORG levels 1-4 are present",
+			"Condition": "OrgLevel1 = Present and OrgLevel2 = Present and OrgLevel3 = Present and OrgLevel4 = Present"
+		},
+		"SomeParametersAreAbsent": {
+			"Name": "SomeParametersAreAbsent",
+			"Text": "not all ORG levels 1-4 are present",
+			"Condition": "OrgLevel1 = Absent or OrgLevel2 = Absent or OrgLevel3 = Absent or OrgLevel4 = Absent"
+		},
+		"AllParametersAreAbsent": {
+			"Name": "AllParametersAreAbsent",
+			"Text": "ORG levels 1-4 are all absent",
+			"Condition": "OrgLevel1 = Absent and OrgLevel2 = Absent and OrgLevel3 = Absent and OrgLevel4 = Absent"
+		}
+	}
+}
