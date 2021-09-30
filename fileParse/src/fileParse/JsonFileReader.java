@@ -20,8 +20,20 @@ public class JsonFileReader {
 		parseObject(data, object);
 		//printObject(data);
 		
-		objectFieldTest(data);
+		//objectFieldTest(data);
 		objectKeyTest(data);
+		System.out.println("==========================");
+		
+		ArrayList<DataObject> coverageGroups = data.find("CoverageGroups");
+		for (DataObject it : coverageGroups)
+		{
+			System.out.printf("[%s]\n", it.<String>find("Name"));
+			ArrayList<String> array = it.find("Parameters");
+			for (String itt : array)
+			{
+				System.out.println(itt);
+			}
+		}
 		
 		System.out.println();
         
@@ -35,18 +47,18 @@ public class JsonFileReader {
 	
 	public static void objectKeyTest(DataObject data)
 	{
-		printObjectKeys((DataObject)data.find("ExpectedResults"));
+		printObjectKeys(data.find("ExpectedResults"));
 		
 		// for OrgLevelUnits
-		printObjectKeys((DataObject)data.find("InputParameters"));
+		printObjectKeys(data.find("InputParameters"));
 		System.out.println("==========================");
 		
-		printObjectKeys((DataObject)data.find("OrgLevel1"));
+		printObjectKeys(data.find("OrgLevel1"));
 		System.out.println("==========================");
 		
-		DataObject obj = (DataObject)data.find("InputParameters");
-		obj = (DataObject)obj.find("Ordering");
-		printObjectKeys((DataObject)obj.find("EquivalenceClasses"));
+		DataObject obj = data.find("InputParameters");
+		obj = obj.find("Ordering");
+		printObjectKeys(obj.find("EquivalenceClasses"));
 	}
 	
 	public static void printObjectKeys(DataObject data)
@@ -140,9 +152,10 @@ public class JsonFileReader {
 	
 	public static void parseObject(DataObject data, JSONObject json)
 	{
-		
+
 		Iterator<String> iter = json.keySet().iterator();
 		while (iter.hasNext()) {
+			
 			String key = iter.next();
 			
 			if (json.get(key) instanceof JSONObject) {

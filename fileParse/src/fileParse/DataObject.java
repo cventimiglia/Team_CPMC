@@ -18,7 +18,7 @@ public class DataObject {
 		childObject = new HashMap<String, DataObject>();
 	}
 
-	public DataObject findObjectInChild(DataObject child, String key) {
+	private DataObject findObjectInChild(DataObject child, String key) {
 		if (child == null)
 			return null;
 
@@ -40,27 +40,28 @@ public class DataObject {
 		
 	}
 
-	public Object find(String key) {
+	@SuppressWarnings("unchecked")
+	public <T> T find(String key) {
 		String string = field.get(key);
 		if (string != null && string.length() != 0)
-			return string;
+			return (T)string;
 
 		ArrayList<String> stringArray = fieldArray.get(key);
 		if (stringArray != null && stringArray.size() != 0)
-			return stringArray;
+			return (T)stringArray;
 
 		ArrayList<DataObject> objectArray = fieldArrayObject.get(key);
 		if (objectArray != null && objectArray.size() != 0)
-			return objectArray;
+			return (T)objectArray;
 		
 		for (Map.Entry<String, DataObject> entry : childObject.entrySet()) {
 			DataObject value = entry.getValue();
 			if (key.equals(entry.getKey()))
-				return value;
+				return (T)value;
 			
 			DataObject object = findObjectInChild(value, key);
 			if (object != null)
-				return object;
+				return (T)object;
 		}
 
 		return null;
