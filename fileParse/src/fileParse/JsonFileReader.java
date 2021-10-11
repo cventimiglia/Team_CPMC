@@ -18,13 +18,55 @@ public class JsonFileReader {
 		DataObject data = new DataObject();
 		
 		parseObject(data, object);
-		printObject(data);
+		//printObject(data);
+		
+		//objectFieldTest(data);
+		objectKeyTest(data);
+		System.out.println("==========================");
+		
+		ArrayList<DataObject> coverageGroups = data.find("CoverageGroups");
+		for (DataObject it : coverageGroups)
+		{
+			System.out.printf("[%s]\n", it.<String>find("Name"));
+			ArrayList<String> array = it.find("Parameters");
+			for (String itt : array)
+			{
+				System.out.println(itt);
+			}
+		}
 		
 		System.out.println();
         
 	}
 	
-
+	public static void objectFieldTest(DataObject data)
+	{
+		System.out.printf("Name: %s\n", data.find("Name"));
+		System.out.printf("Text: %s\n", data.find("Text"));
+	}
+	
+	public static void objectKeyTest(DataObject data)
+	{
+		printObjectKeys(data.find("ExpectedResults"));
+		
+		// for OrgLevelUnits
+		printObjectKeys(data.find("InputParameters"));
+		System.out.println("==========================");
+		
+		printObjectKeys(data.find("OrgLevel1"));
+		System.out.println("==========================");
+		
+		DataObject obj = data.find("InputParameters");
+		obj = obj.find("Ordering");
+		printObjectKeys(obj.find("EquivalenceClasses"));
+	}
+	
+	public static void printObjectKeys(DataObject data)
+	{
+		for (Map.Entry<String, DataObject> entry : data.getChildObject().entrySet())
+			System.out.println(entry.getKey());
+	}
+	
 	// for verifying parseObject worked correctly
 	public static void printObject(DataObject object)
 	{
@@ -57,7 +99,7 @@ public class JsonFileReader {
 			
 			String key = entry.getKey();
 			ArrayList<DataObject> value = entry.getValue();
-			System.out.printf("%s", key);
+			System.out.printf("%s\n", key);
 			for (DataObject it : value)
 				printObject(it);
 		}
@@ -67,7 +109,7 @@ public class JsonFileReader {
 			
 			String key = entry.getKey();
 			DataObject value = entry.getValue();
-			System.out.printf("%s", key);
+			System.out.printf("%s\n", key);
 			printObject(value);
 			
 		}
@@ -110,9 +152,10 @@ public class JsonFileReader {
 	
 	public static void parseObject(DataObject data, JSONObject json)
 	{
-		
+
 		Iterator<String> iter = json.keySet().iterator();
 		while (iter.hasNext()) {
+			
 			String key = iter.next();
 			
 			if (json.get(key) instanceof JSONObject) {
