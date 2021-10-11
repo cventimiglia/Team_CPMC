@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Stack;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,13 @@ public class FileSystemStorageService implements StorageService {
 			if (file.isEmpty()) {
 				throw new StorageException("Failed to store empty file.");
 			}
+			String filename = file.getOriginalFilename();
+			int lastIndext = filename.lastIndexOf('.');
+			String extension = filename.substring(lastIndext, filename.length());
+			if (!(extension).equalsIgnoreCase(".json")) {
+				throw new StorageException("Failed to store non-json file");
+			}
+			
 			Path destinationFile = this.rootLocation.resolve(
 					Paths.get(file.getOriginalFilename()))
 					.normalize().toAbsolutePath();
@@ -50,6 +58,15 @@ public class FileSystemStorageService implements StorageService {
 			throw new StorageException("Failed to store file.", e);
 		}
 	}
+	
+	/*
+	public Stack<String> storeAsStack(MultipartFile file) {
+		String filename = file.getOriginalFilename();
+		Stack<String> fileStack = new Stack<String>();
+		fileStack.push(filename);
+		return fileStack;
+	}
+	*/
 
 	@Override
 	public Stream<Path> loadAll() {
