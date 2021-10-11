@@ -1,26 +1,91 @@
 <html xmlns:th="https://www.thymeleaf.org">
-<body>
+<head>
+<style>
+body {background-color: #ffffff;}
+hr {width: 50%;}
+.warning {color: red;}
+.description {margin-left: 25%; margin-right: 25%; padding: 10px; text-align: center;
+    background-color: #f3a8bc; background-size: cover; background-repeat: no-repeat;}
+.upload {margin-left: 25%; margin-right: 25%; padding: 10px; border: 3px dotted black; text-align: center;}
+main {margin-left: 25%; margin-right: 25%; padding: 10px; text-align: center;
+    background-color: #f3a8bc; background-size: cover; background-repeat: no-repeat;}
+ .about {float: left; width: 20%; padding: 10px; text-align: center;}
+  aside {float: right; width: 25%; padding: 10px; text-align: center;}
+ .wrapper {width: 80%; margin-left: auto; margin-right: auto; background-color: #9ccfe7;
+    box-shadow: 5px 5px 5px #1e1e1e;}
+ .centerpeeps {text-align: center;}
 
-	<div th:if="${message}">
-		<h2 th:text="${message}"/>
+</style>
+</head>
+<body>
+<div class="wrapper">
+	
+	<div class="about">
+	<h2> What does this page do? </h2>
+	<hr>
+	<p>
+	The purpose of this project is to implement a functional API that takes the name of an input file as its parameter and return the name of an output file as its only result. The input file will specify the functionality of software under test using the category-partition method. The API will apply the category-partition method to the formated contents of the input file, generating test cases based on the specification, and writing the results for them to an output file in the Cucumber "given-when-then" notation. The test cases will specify the selection of equivalence classes for the parameter and the expected test results when the test has been running.
+	</p>
+	</div>
+	
+	<aside>
+	<h2>What are the roles of this team?</h2>
+	<hr>
+	<p>
+		<br/>&#10024;Code Architecture
+		<br/>&#10024;UI/UX Design
+		<br/>&#10024;Testing
+		<br/>&#10024;Team Manager
+		<br/>&#10024;Client Liason
+		<br/>&#10024;Documentation Lead
+		<br/>&#10024;Data Modeler
+	</p>
+	</aside>
+	<main>
+	<div>
+	<h1 class="centerpeeps">&#128262; The Category-Partition Method &#128262;</h1>
+	<hr>
+	<h3 class="centerpeeps">What is the Category-Partition Method?</h3>
+	<p class="description">
+	As a tester, the number of tests that can be performed depends on a set of conditions and parameters of a function. 
+	<br/>The number of tests can be small, but most of the time, it is a large amount. Therefore, most testers use different testing techniques to help limit the total number of tests needing to be completed. 
+	<br/>The Category-Partition Method allows the tester to generate equivalence classes for each parameter. 
+	<br/>For example, an integer parameter can have equivalence classes: “Negative”, “Positive”, “Max Integer Value”, “Min Integer Value”, and “0”. 
+	<br/>These equivalence classes eliminate the need to test every number of the same type. 
+	<br/>An example would be the numbers Seven or Eight. Since the two numbers are both positive integers, they will provide the same functionality within the test.
+	</p>
 	</div>
 
-	<div>
+	<div class="upload">
 		<form method="POST" enctype="multipart/form-data" action="/">
-			<table>
-				<tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
-				<tr><td></td><td><input type="submit" value="Upload" /></td></tr>
-			</table>
+				<br/><p>Input File Here: </p> <p class="warning">*note: file must be .json file</p>
+				<p><input type="file" name="file" /></p>
+				<p><input type="submit" value="Upload" /></p>
 		</form>
 	</div>
 
+	<div th:if="${message}">
+		<h3 th:text="${message}"/>
+	</div>
+
 	<div>
+		<h3> Your completed file(s) here: </h3>
 		<ul>
 			<li th:each="file : ${files}">
 				<a th:href="${file}" th:text="${file}" />
 			</li>
 		</ul>
 	</div>
-
+	
+	<div class="team">
+		<h2>Team CPMC:</h2>
+		&#10055;Cameron Ventimiglia
+		&#10055;Puen Xie
+		&#10055;Michelle Watson
+		&#10055;Constance Yang
+		
+	</div>
+	</main>
+</div>
 </body>
 </html>
