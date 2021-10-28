@@ -18,6 +18,7 @@ public class OldFileParser {
 		//ArrayList<Parameter> arrList = parseFile("ExecutionQueueOnSave.json"); 
 		//ArrayList<Parameter> arrList = parseFile("IcmVerboseLogging_Expiration.json");
 		//ArrayList<Parameter> arrList = parseFile("MultiTenantOnboardingSecurity.json");
+		//ArrayList<Parameter> arrList = parseFile("MultiTenantUltiproSecurity.json");
 		//ArrayList<Parameter> arrList = parseFile("QuadraticEquationSolver.json");
 		ArrayList<Parameter> arrList = parseFile("OrgLevelUnits.json");
 		int count = 1;
@@ -57,7 +58,7 @@ public class OldFileParser {
 		}
 		else {
 			while (totalParams > 0) { // keep going until every parameter is ran through
-				while (temp > 0) { //keep going until every row is populated 
+				while (temp > -1) { //keep going until every row is populated 
 					//for (int i = 0; i < currentParam; i++) { // use i to 
 						for (int j = 0; j < currentParam; j++) { // use j to populate the matrix 
 							if ((check != totalParams) && (totalParams > 0)) { // this is used to decide which logic to use
@@ -87,15 +88,15 @@ public class OldFileParser {
 				}
 			}
 		}
-		//int c = 0;
+		int c = 0;
 		//use this to print out each element of the matrix
 		for (int row = 0; row < paramArray.length; row++) {
 			for (int column = 0; column < paramArray[row].length; column++) {
 				System.out.print(paramArray[row][column] + " ");
 			}
-			//c++;
+			c++;
 			System.out.println();
-			//System.out.println(c);
+			System.out.println(c);
 		}
 		return tempList;
 	}
