@@ -1,8 +1,10 @@
 package com.example.uploadingfiles;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -70,41 +72,52 @@ public class FileUploadController {
 	public String handleFileUpload(@RequestParam("file") MultipartFile file,
 			RedirectAttributes redirectAttributes) {
 		
+		
 		storageService.store(file);
-		
-		/*
-		File tempFile = new File("temp.txt");
-		
+
+		String fileName = file.getOriginalFilename();
+		int dotIndex = fileName.lastIndexOf(".");
+		String fileNameNoExt = fileName.substring(0, dotIndex);
+
+
 		try {
-			tempFile.createNewFile();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		storageService.store(tempFile);
-		*/
-		
-		try {
-			
-			ArrayList<Parameter> arrList = oldFileParser.parseFile("upload-dir/" + file.getOriginalFilename());
-			int count = 1;
-			
-			for (Parameter temp : arrList) {
-				System.out.println("Parameter Name: " + temp.getName() + " | Equivalence Classes: " + temp.getEquivalenceClasses());
-				count = count * temp.getEquivalenceClasses().size();
-			}
-			
-			String[][] combos = oldFileParser.createCombos(arrList, count);
-			
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
+		File outputFile = new File(fileNameNoExt + "-combos.txt");
+		BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
+
+		ArrayList<Parameter> arrList = oldFileParser.parseFile("upload-dir/" + file.getOriginalFilename());
+		int count = 1;
+
+		for (Parameter temp : arrList) {
+		writer.write("Parameter Name: " + temp.getName() + " | Equivalence Classes: " + temp.getEquivalenceClasses());
+		writer.write("\n");
+		count = count * temp.getEquivalenceClasses().size();
 		}
 
+		writer.write("\n");
+
+		String[][] combos = oldFileParser.createCombos(arrList, count);
+		for (int row = 0; row < combos.length; row++) {
+		for (int column = 0; column < combos[row].length; column++) {
+		writer.write(combos[row][column] + " ");
+
+		}
+
+		writer.write("\n");
+		}
+
+		writer.close();
+		storageService.store(outputFile);
+
+		} catch (Exception e) {
+		e.printStackTrace();
+		}
+
+
+
 		redirectAttributes.addFlashAttribute("message",
-				"You successfully uploaded " + file.getOriginalFilename() + "!");
-		
+		"You successfully uploaded " + file.getOriginalFilename() +"\n"
+		+ "and recieved " + fileNameNoExt + "-combos.txt!");
+
 		return "redirect:/";
 	}
 
