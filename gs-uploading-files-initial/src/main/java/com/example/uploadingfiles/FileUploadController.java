@@ -81,35 +81,35 @@ public class FileUploadController {
 
 
 		try {
-		File outputFile = new File(fileNameNoExt + "-combos.txt");
-		BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
+			File outputFile = new File(fileNameNoExt + "-combos.txt");
+			BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
 
-		ArrayList<Parameter> arrList = oldFileParser.parseFile("upload-dir/" + file.getOriginalFilename());
-		int count = 1;
+			ArrayList<Parameter> arrList = oldFileParser.parseFile("upload-dir/" + file.getOriginalFilename());
+			int count = 1;
 
-		for (Parameter temp : arrList) {
-		writer.write("Parameter Name: " + temp.getName() + " | Equivalence Classes: " + temp.getEquivalenceClasses());
-		writer.write("\n");
-		count = count * temp.getEquivalenceClasses().size();
-		}
+			for (Parameter temp : arrList) {
+				writer.write("Parameter Name: " + temp.getName() + " | Equivalence Classes: " + temp.getEquivalenceClasses());
+				writer.write("\n");
+				count = count * temp.getEquivalenceClasses().size();
+			}
 
-		writer.write("\n");
+			writer.write("\n");
+	
+			String[][] combos = oldFileParser.createCombos(arrList, count);
+			for (int row = 0; row < combos.length; row++) {
+				for (int column = 0; column < combos[row].length; column++) {
+					writer.write(combos[row][column] + " ");
 
-		String[][] combos = oldFileParser.createCombos(arrList, count);
-		for (int row = 0; row < combos.length; row++) {
-		for (int column = 0; column < combos[row].length; column++) {
-		writer.write(combos[row][column] + " ");
+				}
 
-		}
+				writer.write("\n");
+			}
 
-		writer.write("\n");
-		}
-
-		writer.close();
-		storageService.store(outputFile);
+			writer.close();
+			storageService.store(outputFile);
 
 		} catch (Exception e) {
-		e.printStackTrace();
+			e.printStackTrace();
 		}
 
 
