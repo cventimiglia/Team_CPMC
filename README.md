@@ -31,6 +31,25 @@ integer parameter can have equivalence classes: “Negative”, “Positive”, 
 “Min Integer Value”, and “0”. These equivalence classes eliminate the need to test every number
 of the same type. An example would be the numbers Seven or Eight. Since the two numbers are both
 positive integers, they will provide the same functionality within the test.
+# How To Install Our Project
+1. Clone the master branch of this repository to a location of your choosing
+    1. For HTTPS clone
+    ```
+    git clone https://github.com/cventimiglia/Team_CPMC.git
+    ```
+    2. For SSH
+    ```
+    git clone git@github.com:cventimiglia/Team_CPMC.git 
+    ```
+# What To Install
+1. [Simple JSON JAR File](http://www.java2s.com/Code/Jar/j/Downloadjsonsimple111jar.htm)
+    1. Once downloaded, extract the JAR file to a location of your choosing.
+    2. Once extracted, right click the project and click on build path -> configure build path.
+    3. Once the window opens, click on libraries -> Add external JARs -> select the extracted JAR file
+2. Spring Tool Suite 4
+    1. Launch Eclipse and go to the help tab at the top
+    2. Click on Eclipse Marketplace and search for Spring Tools 4 (aka Spring Tool Suite 4)
+    3. Install Spring Tools 4
 # Important Info/Links
 * Our [gitRepo](https://github.com/cventimiglia/Team_CPMC)
 * Our [Progress tracking tool](https://jira.ggc.edu/secure/RapidBoard.jspa?rapidView=93&projectKey=TC&view=planning.nodetail&epics=visible&issueLimit=100)
