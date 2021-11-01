@@ -2,7 +2,6 @@ Parameter Name: InterfaceX-EditState | Equivalence Classes: [Saved, NotYetSaved]
 Parameter Name: ExecutionType | Equivalence Classes: [JarvisExecution, WebExecution]
 Parameter Name: InterfaceX-RunState | Equivalence Classes: [Ready, Running, Completed, NeverRun]
 
-	InterfaceX-EditState	ExecutionType	InterfaceX-RunState
 Test Case 1: NotYetSaved WebExecution NeverRun 
 Test Case 2: NotYetSaved WebExecution Completed 
 Test Case 3: NotYetSaved WebExecution Running 

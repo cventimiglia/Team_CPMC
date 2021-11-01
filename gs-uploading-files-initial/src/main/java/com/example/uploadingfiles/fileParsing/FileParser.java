@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
@@ -94,41 +95,92 @@ public class FileParser {
 	 * @throws Exception
 	 */
 	public ArrayList<Parameter> parseFile(String fileName) throws Exception {
+		DataObject data = new DataObject();
+		JSONObject obj = (JSONObject)new JSONParser().parse(new FileReader(fileName));
+		parseObject(data, obj);
+		
 		ArrayList<String> paramNameList = new ArrayList<>();
 		ArrayList<Parameter> pList = new ArrayList<>();
-
-	    Object obj = new JSONParser().parse(new FileReader(fileName));
-	
-		JSONObject jo = (JSONObject) obj;
 		
-		Map inputParameters = ((Map)jo.get("InputParameters"));
-	    
-	    // iterating address Map
-	    Iterator<Map.Entry> itr1 = inputParameters.entrySet().iterator();
-	    while (itr1.hasNext()) {
-	        Map.Entry pair = itr1.next();
-	        String paramNames = (String) pair.getKey();
-	        paramNameList.add(paramNames); 
-	        
-			Parameter param = new Parameter();
-			param.setName(paramNames);
+		DataObject inputParameters = data.find("InputParameters");
+		for (Map.Entry<String, DataObject> entry : inputParameters.getChildObject().entrySet())
+		{
+			String paramName = entry.getKey();
+			paramNameList.add(paramName);
 			
-	        JSONObject value = (JSONObject) pair.getValue();
-	        Map equivClass = ((Map) value.get("EquivalenceClasses"));
-	        Iterator<Map.Entry> itr2 = equivClass.entrySet().iterator();
-	        while (itr2.hasNext()) {
-	            Map.Entry pair2 = itr2.next();
-	            param.addParam((String)pair2.getKey());   
-	        }
-	        pList.add(param);
-	    }
-	    ArrayList<ArrayList<String>> paramList = new ArrayList<>();
-	    ArrayList<String[]> tempList = new ArrayList<>();
-	    
-	    for (Parameter temp : pList) {
-	    	paramList.add(temp.getEquivalenceClasses());
-	    }
-	    
-	    return pList;
+			Parameter param = new Parameter();
+			param.setName(paramName);
+			
+			DataObject equivClass = entry.getValue().find("EquivalenceClasses");
+			
+			for (Map.Entry<String, DataObject> subentry : equivClass.getChildObject().entrySet())
+				param.addParam(subentry.getKey());
+			
+			pList.add(param);
+			
+		}
+		
+		return pList;
+	}
+	
+	public void parseArray(JSONObject json, String key, DataObject data)
+	{
+		JSONArray jsonArray = (JSONArray)json.get(key);
+		if (jsonArray == null)
+			return;
+		
+		ArrayList<DataObject> objectArray = new ArrayList<DataObject>();
+		ArrayList<String> stringArray = new ArrayList<String>();
+		
+		for (int i = 0; i < jsonArray.size(); i++)
+		{
+			Object object = jsonArray.get(i);
+			
+			if (object instanceof JSONObject)
+			{
+				// json array contains an jsonobject
+				// create a new data object and let parseObject handle it
+				DataObject arrayObject = new DataObject();
+				parseObject(arrayObject, (JSONObject)object);
+				objectArray.add(arrayObject);
+				continue;
+			}
+			
+			stringArray.add((String)object);
+		}
+		
+		if (objectArray.size() > 0)
+			data.addDataArrayObject(key, objectArray);
+		
+		if (stringArray.size() > 0)
+			data.addDataArray(key, stringArray);
+		
+	}
+	
+	public void parseObject(DataObject data, JSONObject json)
+	{
+
+		Iterator<String> iter = json.keySet().iterator();
+		while (iter.hasNext()) {
+			
+			String key = iter.next();
+			
+			if (json.get(key) instanceof JSONObject) {
+				DataObject child = new DataObject();
+				data.addChild(key, child);
+				parseObject(child, (JSONObject)json.get(key));
+				continue;
+			}
+			
+			if (json.get(key) instanceof JSONArray) {
+				parseArray(json, key, data);
+				continue;
+			}
+			
+			String value = (String)json.get(key);
+			data.addDataField(key, value);
+			
+		}
+		
 	}
 }
