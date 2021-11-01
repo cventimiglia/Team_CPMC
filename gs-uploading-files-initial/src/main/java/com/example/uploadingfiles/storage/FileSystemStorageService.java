@@ -61,24 +61,6 @@ public class FileSystemStorageService implements StorageService {
 			throw new StorageException("Failed to store file.", e);
 		}
 	}
-	
-	@Override
-	public void store(File file) {
-		Path destinationFile = this.rootLocation.resolve(
-				Paths.get(file.getName()))
-				.normalize().toAbsolutePath();
-		if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
-			// This is a security check
-			throw new StorageException(
-					"Cannot store file outside current directory.");
-		}
-		try (FileInputStream inputStream = new FileInputStream(file)) {
-			Files.copy(inputStream, destinationFile,
-				StandardCopyOption.REPLACE_EXISTING);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
 	@Override
 	public Stream<Path> loadAll() {

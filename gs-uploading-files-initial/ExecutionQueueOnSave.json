@@ -1,0 +1,83 @@
+{
+	"Name": "SaveTests",
+	"Text": "Interface can be saved using any combinations of the parameters",
+	"CoverageGroups": [{
+		"Name": "CoverageGroupA",
+		"Parameters": ["InterfaceX-EditState", "InterfaceX-RunState"]
+	}, {
+		"Name": "CoverageGroupB",
+		"Parameters": ["InterfaceX-EditState", "ExecutionType"]
+	}, {
+		"Name": "CoverageGroupC",
+		"Parameters": ["InterfaceX-RunState", "ExecutionType"]
+	}],
+	"InputParameters": {
+		"InterfaceX-EditState": {
+			"Name": "InterfaceX-EditState",
+			"Text": "State of editing interface X",
+			"EquivalenceClasses": {
+				"NotYetSaved": {
+					"Name": "NotYetSaved",
+					"Text": "not yet saved"
+				},
+				"Saved": {
+					"Name": "Saved",
+					"Text": "saved"
+				}
+			}
+		},
+		"InterfaceX-RunState": {
+			"Name": "InterfaceX-RunState",
+			"Text": "State of running interface X",
+			"EquivalenceClasses": {
+				"NeverRun": {
+					"Name": "NeverRun",
+					"Text": "never run"
+				},
+				"Ready": {
+					"Name": "Ready",
+					"Text": "ready in the execution queue"
+				},
+				"Running": {
+					"Name": "Running",
+					"Text": "running in the execution queue"
+				},
+				"Completed": {
+					"Name": "Completed",
+					"Text": "completed in the execution queue"
+				}
+			}
+		},
+		"ExecutionType": {
+			"Name": "ExecutionType",
+			"Text": "Execution source",
+			"EquivalenceClasses": {
+				"JarvisExecution": {
+					"Name": "JarvisExecution",
+					"Text": "Jarvis"
+				},
+				"WebExecution": {
+					"Name": "WebExecution",
+					"Text": "UltiPro on the web"
+				}
+			}
+		}
+	},
+	"ExpectedResults": {
+		"ExpectedResultA": {
+			"Name": "ExpectedResultA",
+			"Text": "Interface changes are saved",
+			"Condition": "InterfaceX-EditState = Saved AND (InterfaceX-RunState = NeverRun OR InterfaceX-RunState = Completed)"
+		},
+		"ExpectedResultB": {
+			"Name": "ExpectedResultB",
+			"Text": "Interface changes are not saved",
+			"Condition": "InterfaceX-EditState = Saved AND (InterfaceX-RunState = Ready OR InterfaceX-RunState = Running)"
+		},
+		"ExpectedResultC": {
+			"Name": "ExpectedResultC",
+			"Text": "Interface changes are not saved",
+			"Condition": "InterfaceX-EditState = NotYetSaved"
+		}
+	}
+}

@@ -4,7 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -29,7 +29,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.uploadingfiles.fileParsing.OldFileParser;
+import com.example.uploadingfiles.fileParsing.FileParser;
 import com.example.uploadingfiles.fileParsing.Parameter;
 import com.example.uploadingfiles.storage.StorageFileNotFoundException;
 import com.example.uploadingfiles.storage.StorageService;
@@ -38,12 +38,12 @@ import com.example.uploadingfiles.storage.StorageService;
 public class FileUploadController {
 
 	private final StorageService storageService;
-	private final OldFileParser oldFileParser;
+	private final FileParser fileParser;
 
 	@Autowired
-	public FileUploadController(StorageService storageService, OldFileParser oldFileParser) {
+	public FileUploadController(StorageService storageService, FileParser fileParser) {
 		this.storageService = storageService;
-		this.oldFileParser = oldFileParser;
+		this.fileParser = fileParser;
 	}
 	
 
@@ -72,19 +72,17 @@ public class FileUploadController {
 	public String handleFileUpload(@RequestParam("file") MultipartFile file,
 			RedirectAttributes redirectAttributes) {
 		
-		
 		storageService.store(file);
-
+		
 		String fileName = file.getOriginalFilename();
 		int dotIndex = fileName.lastIndexOf(".");
 		String fileNameNoExt = fileName.substring(0, dotIndex);
 
-
 		try {
-			File outputFile = new File(fileNameNoExt + "-combos.txt");
+			File outputFile = new File("upload-dir/" + fileNameNoExt + "-combos.txt");
 			BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
-
-			ArrayList<Parameter> arrList = oldFileParser.parseFile("upload-dir/" + file.getOriginalFilename());
+	
+			ArrayList<Parameter> arrList = fileParser.parseFile("upload-dir/" + file.getOriginalFilename());
 			int count = 1;
 
 			for (Parameter temp : arrList) {
@@ -92,32 +90,38 @@ public class FileUploadController {
 				writer.write("\n");
 				count = count * temp.getEquivalenceClasses().size();
 			}
-
+			
 			writer.write("\n");
 	
-			String[][] combos = oldFileParser.createCombos(arrList, count);
+			String[][] combos = fileParser.createCombos(arrList, count);
+			
+			/*
+			for (int i = 0; i < arrList.size(); i++) {
+				writer.write("\t" + arrList.get(i).getName());
+			}
+			writer.write("\n");
+			*/
+			int testCaseNumber = 1;
 			for (int row = 0; row < combos.length; row++) {
+				writer.write("Test Case " + testCaseNumber + ": ");
+				testCaseNumber++;
 				for (int column = 0; column < combos[row].length; column++) {
-					writer.write(combos[row][column] + " ");
-
+						writer.write(combos[row][column] + " ");
 				}
-
+	
 				writer.write("\n");
 			}
-
+	
 			writer.close();
-			storageService.store(outputFile);
-
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-
-
 		redirectAttributes.addFlashAttribute("message",
-		"You successfully uploaded " + file.getOriginalFilename() +"\n"
-		+ "and recieved " + fileNameNoExt + "-combos.txt!");
-
+				"You successfully uploaded " + file.getOriginalFilename() +"\n"
+						+ "and recieved " + fileNameNoExt + "-combos.txt!");
+		
 		return "redirect:/";
 	}
 
