@@ -72,13 +72,13 @@ public class FileUploadController {
 	public String handleFileUpload(@RequestParam("file") MultipartFile file,
 			RedirectAttributes redirectAttributes) {
 		
-		storageService.store(file);
-		
 		String fileName = file.getOriginalFilename();
 		int dotIndex = fileName.lastIndexOf(".");
 		String fileNameNoExt = fileName.substring(0, dotIndex);
 
 		try {
+			storageService.store(file);			
+			
 			File outputFile = new File("upload-dir/" + fileNameNoExt + "-combos.txt");
 			BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
 	
@@ -115,7 +115,9 @@ public class FileUploadController {
 			writer.close();
 		
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			redirectAttributes.addFlashAttribute("message", e.getMessage());
+			return "redirect:/";
 		}
 
 		redirectAttributes.addFlashAttribute("message",
