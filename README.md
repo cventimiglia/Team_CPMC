@@ -42,10 +42,10 @@ positive integers, they will provide the same functionality within the test.
     git clone git@github.com:cventimiglia/Team_CPMC.git 
     ```
 # Requirements To Run
-Provided you follow the steps listed in the following sections, you should only need to open the project
+* Provided you follow the steps listed in the following sections, you should only need to open the project
 in Eclipse and run it. To run the application locally, you will need to:
-    1. right click on gs-uploading-files-initial -> run as -> Spring Boot App
-    2. Once the service is started, type localhost:8080 into your browser to pull up the page.
+	* right click on gs-uploading-files-initial -> run as -> Spring Boot App
+	* Once the service is started, type localhost:8080 into your browser to pull up the page.
 # What To Install
 1. [Simple JSON JAR File](http://www.java2s.com/Code/Jar/j/Downloadjsonsimple111jar.htm)
     1. Once downloaded, extract the JAR file to a location of your choosing.
