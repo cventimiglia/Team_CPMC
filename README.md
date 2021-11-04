@@ -52,13 +52,14 @@ positive integers, they will provide the same functionality within the test.
     3. Install Spring Tools 4
 # How To Use Testing Packages
 1. **Selenium Tests**
-For the selenium tests, you can follow either of the guides below to install the chrome driver and the selenium JAR files 
-    1. [First link](https://www.guru99.com/installing-selenium-webdriver.html)
-    2. [Second link](https://www.browserstack.com/guide/how-to-setup-selenium-in-eclipse)
+	*For the selenium tests, you can follow either of the guides below to install the chrome driver and the selenium JAR files 
+    	1. [First link](https://www.guru99.com/installing-selenium-webdriver.html)
+    	2. [Second link](https://www.browserstack.com/guide/how-to-setup-selenium-in-eclipse)
 
 2. **JUNIT Tests**
-    1.You should be able to run the JUNIT test without downloading any additional libraries while in Eclipse. **NOTE** The tests made inside of the com.example.uploadingfiles and com.example.uploadingfiles.storage packages were not made by us and were imported using Spring.
+	*You should be able to run the JUNIT test without downloading any additional libraries while in Eclipse. **NOTE** The tests made inside of the com.example.uploadingfiles and com.example.uploadingfiles.storage packages were not made by us and were imported using Spring.
 [Link to the Spring Guide](https://spring.io/guides/gs/uploading-files/)
+
 # Important Info/Links
 * Our [gitRepo](https://github.com/cventimiglia/Team_CPMC)
 * Our [Progress tracking tool](https://jira.ggc.edu/secure/RapidBoard.jspa?rapidView=93&projectKey=TC&view=planning.nodetail&epics=visible&issueLimit=100)
