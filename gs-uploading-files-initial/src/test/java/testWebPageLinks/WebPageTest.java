@@ -50,6 +50,17 @@ public class WebPageTest {
     }
     
     /**
+     * this method tests the user guide link
+     */
+    @Test
+    public void testUserGuideLink() {
+    	driver.get("http://localhost:8080/");
+    	
+    	WebElement userGuide = driver.findElement(By.linkText("Link to User Guide"));
+    	userGuide.click();
+    }
+    
+    /**
      * this method tests the choose file button and the upload button
      */
     @Test
