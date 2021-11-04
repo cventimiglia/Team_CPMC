@@ -62,3 +62,5 @@ positive integers, they will provide the same functionality within the test.
 * Communication Platforms
 	* Discord
 	* Microsoft Teams
+# Quick Link To Our License
+[License](https://github.com/cventimiglia/Team_CPMC/blob/main/LICENSE)
