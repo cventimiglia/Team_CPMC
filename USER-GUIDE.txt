@@ -5,11 +5,17 @@ This API takes your JSON file and applies the category partitioning method to it
 this method, you will be able to automatically generate test cases made from all possible combinations of
 equivalence classes. Now let's move on to how to use the API.
 
-There is a link provided on the web page that brings you to a sample JSON file and how your file should
-be formatted. Once you have a JSON file ready to be uploaded, simply click the "choose file" button
-and select your file. Make sure to choose a JSON file or else the API will not accept it and return an error
-message instead. Once the file is selected, click the "upload" button. You will now be able to see
+1. There is a link provided on the web page that brings you to a sample JSON file and how your file should
+be formatted. Use this to help you format your file properly.
+
+2. Once you have a JSON file ready to be uploaded, simply click the "choose file" button and select your file. 
+Make sure to choose a JSON file or else the API will not accept it and return an error message instead. 
+
+3. Once the file is selected, click the "upload" button. You will now be able to see
 two download links. The file with the ".txt" extension is the file you recieved with the generated test cases.
-The file with the ".json" extension is the same file you uploaded. In order to download the file with your
-generated test cases, simply click on the proper link(file with ".txt" extension" and open the file 
-in a text editor of your choice. We hope you enjoy and thank you for using our API.
+The file with the ".json" extension is the same file you uploaded. 
+
+4. In order to download the file with your generated test cases, simply click on the 
+proper link(file with ".txt" extension") and open the file in a text editor of your choice. 
+
+We hope you enjoy and thank you for using our API.
