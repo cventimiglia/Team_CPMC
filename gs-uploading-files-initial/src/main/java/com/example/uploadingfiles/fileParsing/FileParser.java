@@ -126,6 +126,7 @@ public class FileParser {
 	public void parseArray(JSONObject json, String key, DataObject data)
 	{
 		JSONArray jsonArray = (JSONArray)json.get(key);
+		// sanity checks
 		if (jsonArray == null)
 			return;
 		
@@ -149,6 +150,7 @@ public class FileParser {
 			stringArray.add((String)object);
 		}
 		
+		// sanity checks
 		if (objectArray.size() > 0)
 			data.addDataArrayObject(key, objectArray);
 		
@@ -159,13 +161,15 @@ public class FileParser {
 	
 	public void parseObject(DataObject data, JSONObject json)
 	{
-
+		// loop through the whole json
 		Iterator<String> iter = json.keySet().iterator();
 		while (iter.hasNext()) {
 			
 			String key = iter.next();
 			
 			if (json.get(key) instanceof JSONObject) {
+				// if its an object (surrounded by '{}')
+				// create a new DataObject and do parseObject again
 				DataObject child = new DataObject();
 				data.addChild(key, child);
 				parseObject(child, (JSONObject)json.get(key));
@@ -173,6 +177,8 @@ public class FileParser {
 			}
 			
 			if (json.get(key) instanceof JSONArray) {
+				// if its an array (surrounded by '[]')
+				// let parseArray handle it
 				parseArray(json, key, data);
 				continue;
 			}
