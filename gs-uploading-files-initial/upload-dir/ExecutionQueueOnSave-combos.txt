@@ -2,19 +2,19 @@ Parameter Name: InterfaceX-EditState | Equivalence Classes: [Saved, NotYetSaved]
 Parameter Name: ExecutionType | Equivalence Classes: [JarvisExecution, WebExecution]
 Parameter Name: InterfaceX-RunState | Equivalence Classes: [Ready, Running, Completed, NeverRun]
 
-Test Case 1: NotYetSaved WebExecution NeverRun 
-Test Case 2: NotYetSaved WebExecution Completed 
-Test Case 3: NotYetSaved WebExecution Running 
-Test Case 4: NotYetSaved WebExecution Ready 
-Test Case 5: NotYetSaved JarvisExecution NeverRun 
-Test Case 6: NotYetSaved JarvisExecution Completed 
-Test Case 7: NotYetSaved JarvisExecution Running 
-Test Case 8: NotYetSaved JarvisExecution Ready 
-Test Case 9: Saved WebExecution NeverRun 
-Test Case 10: Saved WebExecution Completed 
-Test Case 11: Saved WebExecution Running 
-Test Case 12: Saved WebExecution Ready 
-Test Case 13: Saved JarvisExecution NeverRun 
-Test Case 14: Saved JarvisExecution Completed 
-Test Case 15: Saved JarvisExecution Running 
-Test Case 16: Saved JarvisExecution Ready 
+Test Case 1:   NotYetSaved WebExecution NeverRun 
+Test Case 2:   NotYetSaved WebExecution Completed 
+Test Case 3:   NotYetSaved WebExecution Running 
+Test Case 4:   NotYetSaved WebExecution Ready 
+Test Case 5:   NotYetSaved JarvisExecution NeverRun 
+Test Case 6:   NotYetSaved JarvisExecution Completed 
+Test Case 7:   NotYetSaved JarvisExecution Running 
+Test Case 8:   NotYetSaved JarvisExecution Ready 
+Test Case 9:   Saved WebExecution NeverRun 
+Test Case 10:  Saved WebExecution Completed 
+Test Case 11:  Saved WebExecution Running 
+Test Case 12:  Saved WebExecution Ready 
+Test Case 13:  Saved JarvisExecution NeverRun 
+Test Case 14:  Saved JarvisExecution Completed 
+Test Case 15:  Saved JarvisExecution Running 
+Test Case 16:  Saved JarvisExecution Ready 
