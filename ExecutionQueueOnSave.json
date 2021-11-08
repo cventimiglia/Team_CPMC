@@ -3,81 +3,124 @@
 	"Text": "Interface can be saved using any combinations of the parameters",
 	"CoverageGroups": [{
 		"Name": "CoverageGroupA",
-		"Parameters": ["InterfaceX-EditState", "InterfaceX-RunState"]
-	}, {
-		"Name": "CoverageGroupB",
-		"Parameters": ["InterfaceX-EditState", "ExecutionType"]
-	}, {
-		"Name": "CoverageGroupC",
-		"Parameters": ["InterfaceX-RunState", "ExecutionType"]
+		"Parameters": ["A", "B", "C"]
 	}],
 	"InputParameters": {
-		"InterfaceX-EditState": {
-			"Name": "InterfaceX-EditState",
-			"Text": "State of editing interface X",
+		"A": {
+			"Name": "A",
+			"Text": "A",
 			"EquivalenceClasses": {
-				"NotYetSaved": {
-					"Name": "NotYetSaved",
-					"Text": "not yet saved"
+				"0": {
+					"Name": "0",
+					"Text": "0"
 				},
-				"Saved": {
-					"Name": "Saved",
-					"Text": "saved"
+				"1": {
+					"Name": "1",
+					"Text": "1"
+				},
+				"Negative": {
+					"Name": "Negative",
+					"Text": "any integer in the range (-100, -1)"
+				},
+				"Positive": {
+					"Name": "Positive",
+					"Text": "any integer in the range (2, 100)"
 				}
 			}
 		},
-		"InterfaceX-RunState": {
-			"Name": "InterfaceX-RunState",
-			"Text": "State of running interface X",
+		"B": {
+			"Name": "B",
+			"Text": "B",
 			"EquivalenceClasses": {
-				"NeverRun": {
-					"Name": "NeverRun",
-					"Text": "never run"
+				"0": {
+					"Name": "0",
+					"Text": "0"
 				},
-				"Ready": {
-					"Name": "Ready",
-					"Text": "ready in the execution queue"
+				"1": {
+					"Name": "1",
+					"Text": "1"
 				},
-				"Running": {
-					"Name": "Running",
-					"Text": "running in the execution queue"
+				"Negative": {
+					"Name": "Negative",
+					"Text": "any integer in the range (-100, -1)"
 				},
-				"Completed": {
-					"Name": "Completed",
-					"Text": "completed in the execution queue"
+				"Positive": {
+					"Name": "Positive",
+					"Text": "any integer in the range (2, 100)"
 				}
 			}
 		},
-		"ExecutionType": {
-			"Name": "ExecutionType",
-			"Text": "Execution source",
+		"C": {
+			"Name": "C",
+			"Text": "C",
 			"EquivalenceClasses": {
-				"JarvisExecution": {
-					"Name": "JarvisExecution",
-					"Text": "Jarvis"
+				"0": {
+					"Name": "0",
+					"Text": "0"
 				},
-				"WebExecution": {
-					"Name": "WebExecution",
-					"Text": "UltiPro on the web"
+				"1": {
+					"Name": "1",
+					"Text": "1"
+				},
+				"Negative": {
+					"Name": "Negative",
+					"Text": "any integer in the range (-100, -1)"
+				},
+				"Positive": {
+					"Name": "Positive",
+					"Text": "any integer in the range (2, 100)"
+				}
+			}
+		},
+		"Discriminant": {
+			"Name": "Discriminant",
+			"Text": "discriminant (b^2 - 4ac)",
+			"EquivalenceClasses": {
+				"0": {
+					"Name": "0",
+					"Text": "0",
+				},
+				"LessThanZero": {
+					"Name": "LessThanZero",
+					"Text": "N less than 0"
+				},
+				"GreaterThanZero": {
+					"Name": "GreaterThanZero",
+					"Text": "N greater than 0"
 				}
 			}
 		}
 	},
 	"ExpectedResults": {
-		"ExpectedResultA": {
-			"Name": "ExpectedResultA",
-			"Text": "Interface changes are saved",
-			"Condition": "InterfaceX-EditState = Saved AND (InterfaceX-RunState = NeverRun OR InterfaceX-RunState = Completed)"
+		"FirstQuadraticRoot": {
+			"Name": "FirstQuadraticRoot",
+			"Text": "first root is (-b + SQRT(b^2 - 4ac))/2a",
+			"Condition": "A != 0 and Discriminant = GreaterThanZero"
 		},
-		"ExpectedResultB": {
-			"Name": "ExpectedResultB",
-			"Text": "Interface changes are not saved",
-			"Condition": "InterfaceX-EditState = Saved AND (InterfaceX-RunState = Ready OR InterfaceX-RunState = Running)"
+		"SecondQuadraticRoot": {
+			"Name": "SecondQuadraticRoot",
+			"Text": "second root is (-b - SQRT(b^2 - 4ac))/2a",
+			"Condition": "A != 0 and Discriminant = GreaterThanZero"
 		},
-		"ExpectedResultC": {
-			"Name": "ExpectedResultC",
-			"Text": "Interface changes are not saved",
-			"Condition": "InterfaceX-EditState = NotYetSaved"
+		"OneQuadraticRoot": {
+			"Name": "OneQuadraticRoot",
+			"Text": "only root is -b/2a",
+			"Condition": "A != 0 and Discriminant = 0"
+		},
+		"FirstImaginaryRoot": {
+			"Name": "FirstImaginaryRoot",
+			"Text": "first imaginary root is (-b + [i]SQRT(4ac - b^2))/2a",
+			"Condition": "A != 0 and Discriminant = LessThanZero"
+		},
+		"SecondImaginaryRoot": {
+			"Name": "SecondImaginaryRoot",
+			"Text": "second imaginary root is (-b - [i]SQRT(4ac - b^2))/2a",
+			"Condition": "A != 0 and Discriminant = LessThanZero"
+		},
+		"UndefinedRoots": {
+			"Name": "UndefinedRoots",
+			"Text": "roots are undefined",
+			"Condition": "A = 0"
 		}
 	}
 }

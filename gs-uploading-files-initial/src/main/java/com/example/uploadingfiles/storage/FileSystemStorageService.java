@@ -6,9 +6,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
+import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.nio.file.StandardOpenOption;
 import java.util.Stack;
 import java.util.stream.Stream;
 
@@ -52,10 +54,13 @@ public class FileSystemStorageService implements StorageService {
 				throw new StorageException(
 						"Cannot store file outside current directory.");
 			}
-			try (InputStream inputStream = file.getInputStream()) {
-				Files.copy(inputStream, destinationFile,
-					StandardCopyOption.REPLACE_EXISTING);
-			}
+			
+			try { 
+				Files.deleteIfExists(destinationFile);
+				Files.createFile(destinationFile); } 
+			catch (IOException e) {};
+			Files.write(destinationFile, file.getBytes(), StandardOpenOption.TRUNCATE_EXISTING);
+			
 		}
 		catch (IOException e) {
 			throw new StorageException("Failed to store file.", e);
@@ -93,10 +98,12 @@ public class FileSystemStorageService implements StorageService {
 						"Could not read file: " + filename);
 
 			}
+			
 		}
 		catch (MalformedURLException e) {
 			throw new StorageFileNotFoundException("Could not read file: " + filename, e);
 		}
+	
 	}
 
 	@Override
