@@ -16,6 +16,6 @@ two download links. The file with the ".txt" extension is the file you recieved 
 The file with the ".json" extension is the same file you uploaded. 
 
 4. In order to download the file with your generated test cases, simply click on the 
-proper link(file with ".txt" extension") and open the file in a text editor of your choice. 
+proper link(file with ".txt" extension) and open the file in a text editor of your choice. 
 
 We hope you enjoy and thank you for using our API.
