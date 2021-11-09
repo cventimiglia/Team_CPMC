@@ -2,6 +2,7 @@ package com.example.uploadingfiles.storage;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -14,6 +15,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.Stack;
 import java.util.stream.Stream;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.core.io.Resource;
@@ -32,10 +34,17 @@ public class FileSystemStorageService implements StorageService {
 	public FileSystemStorageService(StorageProperties properties) {
 		this.rootLocation = Paths.get(properties.getLocation());
 	}
-
-	@Override
-	public void store(MultipartFile file) {
+	
+	private synchronized void syncStore(MultipartFile file) {
+		
 		try {
+			File dir = new File(rootLocation.toString());
+			for (File it : dir.listFiles())
+			{
+				if (!it.isDirectory())
+					it.delete();
+			}
+			
 			if (file.isEmpty()) {
 				throw new StorageException("Failed to store empty file.");
 			}
@@ -55,16 +64,20 @@ public class FileSystemStorageService implements StorageService {
 						"Cannot store file outside current directory.");
 			}
 			
-			try { 
-				Files.deleteIfExists(destinationFile);
-				Files.createFile(destinationFile); } 
-			catch (IOException e) {};
-			Files.write(destinationFile, file.getBytes(), StandardOpenOption.TRUNCATE_EXISTING);
+			//Files.deleteIfExists(destinationFile);
+			FileOutputStream stream = new FileOutputStream(destinationFile.toString());
+			stream.write(file.getBytes());
+			stream.close();
 			
 		}
 		catch (IOException e) {
 			throw new StorageException("Failed to store file.", e);
 		}
+	}
+	
+	@Override
+	public void store(MultipartFile file) {
+		syncStore(file);
 	}
 
 	@Override
