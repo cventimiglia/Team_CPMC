@@ -5,6 +5,7 @@ This API takes your JSON file and applies the category partitioning method to it
 this method, you will be able to automatically generate test cases made from all possible combinations of
 equivalence classes. Now let's move on to how to use the API.
 
+------------Web Page Instructions------------
 1. There is a link provided on the web page that brings you to a sample JSON file and how your file should
 be formatted. Use this to help you format your file properly.
 
@@ -18,4 +19,17 @@ The file with the ".json" extension is the same file you uploaded.
 4. In order to download the file with your generated test cases, simply click on the 
 proper link(file with ".txt" extension) and open the file in a text editor of your choice. 
 
+------------Command Line Instructions------------
+1. In order to run the API in the command line, you must first navigate to the directory where your
+JSON file is stored.
+
+2. Once in the proper directory, you can enter this command: 
+
+curl -v --insecure -F "file=@<File Name>" https://category-partition.herokuapp.com/api
+NOTE: <File Name> is the name of your JSON file. Make sure to inlcude the ".json" extension too.
+
+3. All of your combinations should be displayed on the command prompt screen.
+
+
 We hope you enjoy and thank you for using our API.
+~Team CPMC
